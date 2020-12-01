@@ -5,5 +5,7 @@
 (def cartesian-2 (combo/cartesian-product input input))
 (def cartesian-3 (combo/cartesian-product input input input))
 
-(apply * (first (filter (fn [[a b]] (= 2020 (+ a b))) cartesian-2)))
-(apply * (first (filter (fn [[a b c]] (= 2020 (+ a b c))) cartesian-3)))
+(defn adds-to-2020 [v] (= 2020 (apply + v)))
+
+(apply * (first (filter adds-to-2020 cartesian-2)))
+(apply * (first (filter adds-to-2020 cartesian-3)))
