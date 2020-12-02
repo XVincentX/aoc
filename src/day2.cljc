@@ -1008,5 +1008,6 @@
 
 
 (count (filter (fn [[min max letter pwd]]
-                 (or (= letter (nth pwd (dec min))) (= letter (nth pwd (dec max)))))
+                 (let [l1 (nth pwd (dec min)) l2 (nth pwd (dec max))]
+                   (or (and (= letter l1) (not (= letter l2))) (and (= letter l2) (not (= letter l1))))))
                input))
