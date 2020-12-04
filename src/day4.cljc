@@ -5,28 +5,25 @@
 (def input (split (clojure.core/slurp "./day4input.txt") #"\n\n"))
 (def passports (->> input
                     (map #(re-seq #"(\S+):(\S+)" %))
-                    (map #(st/coerce ::passport
-                                     (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} %)
-                                     st/string-transformer))))
+                    (map (fn [row] (st/coerce ::passport
+                                              (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} row)
+                                              st/string-transformer)))))
 
 
 (defn remove-last-chars [s n]
   (subs s 0 (- (count s) n)))
 
-(defn in-range [val x y]
-  (and (>= val x) (<= val y)))
-
 (defn string-in-range [val x y]
   (let [number (remove-last-chars val 2)
         converted (Integer. number)]
-    (and (some? converted) (in-range converted x y))))
+    (s/int-in-range? x y converted)))
 
 (s/def ::passport (s/keys :req-un [::byr ::iyr ::eyr ::hgt ::hcl ::ecl ::pid] :opt-un [::cid]))
 
 ; Disable the following for part 1
-(s/def ::byr (s/and integer? #(in-range % 1920 2002)))
-(s/def ::iyr (s/and integer? #(in-range % 2010 2020)))
-(s/def ::eyr (s/and integer? #(in-range % 2020 2030)))
+(s/def ::byr (s/and integer? #(s/int-in-range? 1920 2002 %)))
+(s/def ::iyr (s/and integer? #(s/int-in-range? 2010 2020 %)))
+(s/def ::eyr (s/and integer? #(s/int-in-range? 2020 2030 %)))
 
 (s/def ::hgt
   (s/or
