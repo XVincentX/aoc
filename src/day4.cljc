@@ -8,7 +8,6 @@
                     (map (fn [value]
                            (st/coerce ::passport (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} value) st/string-transformer)))))
 
-(s/def ::passport (s/keys :req-un [::byr ::iyr ::eyr ::hgt ::hcl ::ecl ::pid] :opt-un [::cid]))
 
 (defn remove-last-chars [s n]
   (subs s 0 (- (count s) n)))
@@ -20,6 +19,8 @@
   (let [number (remove-last-chars val 2)
         converted (Integer. number)]
     (and (some? converted) (in-range converted x y))))
+
+(s/def ::passport (s/keys :req-un [::byr ::iyr ::eyr ::hgt ::hcl ::ecl ::pid] :opt-un [::cid]))
 
 ; Disable the following for part 1
 (s/def ::byr (s/and integer? #(>= % 1920) #(<= % 2002)))
@@ -36,5 +37,7 @@
 (s/def ::hcl (s/and string? #(re-matches #"^\#[0-9a-f]{6}$" %)))
 (s/def ::ecl #(some? (some #{%} #{"amb" "blu" "brn" "gry" "grn" "hzl" "oth"})))
 (s/def ::pid (s/and string? #(re-matches #"^[0-9]{9}$" %)))
+
+; End disable the following for part 1
 
 (count (filter (partial s/valid? ::passport) passports))
