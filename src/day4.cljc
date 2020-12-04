@@ -24,9 +24,9 @@
 (s/def ::passport (s/keys :req-un [::byr ::iyr ::eyr ::hgt ::hcl ::ecl ::pid] :opt-un [::cid]))
 
 ; Disable the following for part 1
-(s/def ::byr (s/and integer? #(>= % 1920) #(<= % 2002)))
-(s/def ::iyr (s/and integer? #(>= % 2010) #(<= % 2020)))
-(s/def ::eyr (s/and integer? #(>= % 2020) #(<= % 2030)))
+(s/def ::byr (s/and integer? #(in-range % 1920 2002)))
+(s/def ::iyr (s/and integer? #(in-range % 2010 2020)))
+(s/def ::eyr (s/and integer? #(in-range % 2020 2030)))
 
 (s/def ::hgt
   (s/or
