@@ -16,14 +16,14 @@
 (defn string-in-range [val x y]
   (let [number (remove-last-chars val 2)
         converted (Integer. number)]
-    (s/int-in-range? x y converted)))
+    (s/int-in-range? x (inc y) converted)))
 
 (s/def ::passport (s/keys :req-un [::byr ::iyr ::eyr ::hgt ::hcl ::ecl ::pid] :opt-un [::cid]))
 
 ; Disable the following for part 1
-(s/def ::byr (s/and integer? #(s/int-in-range? 1920 2002 %)))
-(s/def ::iyr (s/and integer? #(s/int-in-range? 2010 2020 %)))
-(s/def ::eyr (s/and integer? #(s/int-in-range? 2020 2030 %)))
+(s/def ::byr (s/and integer? #(s/int-in-range? 1920 (inc 2002) %)))
+(s/def ::iyr (s/and integer? #(s/int-in-range? 2010 (inc 2020) %)))
+(s/def ::eyr (s/and integer? #(s/int-in-range? 2020 (inc 2030) %)))
 
 (s/def ::hgt
   (s/or
