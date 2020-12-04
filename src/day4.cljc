@@ -5,8 +5,9 @@
 (def input (split (clojure.core/slurp "./day4input.txt") #"\n\n"))
 (def passports (->> input
                     (map #(re-seq #"(\S+):(\S+)" %))
-                    (map (fn [value]
-                           (st/coerce ::passport (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} value) st/string-transformer)))))
+                    (map #(st/coerce ::passport
+                                     (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} %)
+                                     st/string-transformer))))
 
 
 (defn remove-last-chars [s n]
