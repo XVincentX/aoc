@@ -9,7 +9,6 @@
                                               (reduce #(assoc %1 (keyword (second %2)) (nth %2 2)) {} row)
                                               st/string-transformer)))))
 
-
 (defn remove-last-chars [s n]
   (subs s 0 (- (count s) n)))
 

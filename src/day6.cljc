@@ -10,7 +10,6 @@
                       (map set)
                       (reduce #(+ %1 (count %2)) 0))) ; Part 1
 
-
 (def all-answers (->> input
                       (map #(split % #"\n"))
                       (map #(map (fn [x] (set (clojure.core/char-array x))) %))
