@@ -1,11 +1,10 @@
 (ns day7 (:require [clojure.string :refer [split-lines split]]))
 
 (defn get-data-from-line [acc line]
-  (let [target-bag (-> line
-                       (split #" ")
-                       (as-> s (take 2 s))
-                       (as-> s (interpose " " s))
-                       (as-> s (apply str s)))
+  (let [target-bag (->> (split line #" ")
+                        (take 2)
+                        (interpose " ")
+                        (apply str))
         matches (re-seq #"(?:(\d+) (\S* \S*) bags?(?:,|.)\s?)" line)]
     (assoc acc target-bag (reduce #(assoc %1 (nth %2 2) (Integer. (second %2))) {} matches))))
 
