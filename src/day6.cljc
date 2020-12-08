@@ -1,7 +1,7 @@
 (ns day6 (:require [clojure.string :refer [split split-lines]]
                    [clojure.set :refer [intersection]]))
 
-(def input (-> "./day6input.txt"
+(def input (-> "./input/day6input.txt"
                (clojure.core/slurp)
                (split #"\n\n")))
 

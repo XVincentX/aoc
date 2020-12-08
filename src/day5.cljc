@@ -1,7 +1,7 @@
 (ns day5 (:require [clojure.math.combinatorics :refer [cartesian-product]]
                    [clojure.set :refer [difference]]))
 
-(def input (-> "./day5input.txt"
+(def input (-> "./input/day5input.txt"
                clojure.core/slurp
                clojure.core/read-string))
 

@@ -2,7 +2,7 @@
                    [clojure.string :refer [split ends-with?]]
                    [spec-tools.core :as st]))
 
-(def input (split (clojure.core/slurp "./day4input.txt") #"\n\n"))
+(def input (split (clojure.core/slurp "./input/day4input.txt") #"\n\n"))
 (def passports (->> input
                     (map #(re-seq #"(\S+):(\S+)" %))
                     (map (fn [row] (st/coerce ::passport

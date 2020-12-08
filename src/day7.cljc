@@ -11,7 +11,7 @@
 (defn get-containing-bag-type [bag-type map]
   (filter (fn [[_ inner-map]] (get inner-map bag-type)) map))
 
-(def bags-map (->> "./day7input.txt"
+(def bags-map (->> "./input/day7input.txt"
                    clojure.core/slurp
                    split-lines
                    (reduce get-data-from-line {})))

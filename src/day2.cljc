@@ -1,6 +1,6 @@
 (ns day2)
 
-(def input (-> "./day2input.txt"
+(def input (-> "./input/day2input.txt"
                clojure.core/slurp
                clojure.core/read-string))
 

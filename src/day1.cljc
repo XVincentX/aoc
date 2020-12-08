@@ -1,6 +1,6 @@
 (ns day1 (:require [clojure.math.combinatorics :as combo]))
 
-(def input (-> "./day1input.txt"
+(def input (-> "./input/day1input.txt"
                clojure.core/slurp
                clojure.core/read-string))
 

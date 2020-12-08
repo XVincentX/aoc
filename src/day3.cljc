@@ -1,6 +1,6 @@
 (ns day3)
 
-(def input (->> "./day3input.txt"
+(def input (->> "./input/day3input.txt"
                 clojure.core/slurp
                 clojure.core/read-string
                 (map #(flatten (repeat %)))))
