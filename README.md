@@ -1,3 +1,5 @@
-# AoC 2020 in Clojure
+# AoC
+
+* 2020: Clojure
 
 Enjoy.
