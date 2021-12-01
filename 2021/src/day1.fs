@@ -3,7 +3,7 @@ type foldState = { inc: int; cur: int }
 let input =
     "./input/day1input.txt"
     |> System.IO.File.ReadAllLines
-    |> Array.map (fun x -> System.Int32.Parse x)
+    |> Array.map System.Int32.Parse
 
 let p1 =
     input
