@@ -3,3 +3,8 @@
 .nrepl-port
 .clj-kondo
 .cache
+obj
+bin
+
+.fake
+.ionide
