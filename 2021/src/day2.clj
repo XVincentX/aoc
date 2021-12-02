@@ -3,10 +3,9 @@
 (def input (-> "./input/day2input.txt"
                clojure.core/slurp
                split-lines
-               (as-> t
-                     (->> t (map #(split % #" "))
-                          (map (fn [[x y]] [x (Integer/parseInt y)]))
-                          (into [] t)))))
+               (->> (map #(split % #" "))
+                    (map (fn [[x y]] [x (Integer/parseInt y)]))
+                    (into []))))
 
 (def part1
   (reduce
