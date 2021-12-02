@@ -5,7 +5,7 @@
     <RootNamespace>_2021</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src/day2.fs" />
     <Compile Include="src/day1.fs" />
+    <Compile Include="src/day2.fs" />
   </ItemGroup>
 </Project>
