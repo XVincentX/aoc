@@ -1,9 +1,9 @@
-(ns day4 (:require [clojure.string :refer [split-lines]]))
+(ns day1 (:require [clojure.string :refer [split-lines]]))
 
 (def input (-> "./input/day1input.txt"
                clojure.core/slurp
                split-lines
-               (as-> t (map #(. Integer parseInt %) t))
+               (as-> t (map #(Integer/parseInt %) t))
                (as-> t (into [] t))))
 
 (def part1
