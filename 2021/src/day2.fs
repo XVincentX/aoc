@@ -1,6 +1,6 @@
 module day2
 
-type foldState = { forward: int; depth: int; aim: int }
+type foldState = { horizontal: int; depth: int; aim: int }
 
 let input =
     "./input/day2input.txt"
@@ -13,14 +13,14 @@ let p1 =
     |> Array.fold
         (fun acc value ->
             match fst value with
-            | "forward" -> { acc with forward = acc.forward + snd value }
+            | "forward" -> { acc with horizontal = acc.horizontal + snd value }
             | "down" -> { acc with depth = acc.depth + snd value }
             | "up" -> { acc with depth = acc.depth - snd value }
             | _ -> acc)
 
-        { forward = 0; depth = 0; aim = 0 }
+        { horizontal = 0; depth = 0; aim = 0 }
 
-printfn "%i %i" p1.depth p1.forward
+printfn "%i %i" p1.depth p1.horizontal
 
 let p2 =
     input
@@ -29,13 +29,13 @@ let p2 =
             match fst value with
             | "forward" ->
                 { acc with
-                    forward = acc.forward + snd value
-                    depth = snd value * acc.aim }
-            | "down" -> { acc with depth = acc.depth + snd value }
-            | "up" -> { acc with depth = acc.depth - snd value }
+                    horizontal = acc.horizontal + snd value
+                    depth = acc.depth + snd value * acc.aim }
+            | "down" -> { acc with aim = acc.aim + snd value }
+            | "up" -> { acc with aim = acc.aim - snd value }
             | _ -> acc)
 
-        { forward = 0; depth = 0; aim = 0 }
+        { horizontal = 0; depth = 0; aim = 0 }
 
 
-printfn "%i %i" p2.depth p2.forward
+printfn "%i %i" p2.depth p2.horizontal
