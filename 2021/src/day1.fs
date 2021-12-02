@@ -34,7 +34,7 @@ let p2 =
             if sum > acc.cur then
                 { inc = acc.inc + 1; cur = sum }
             else
-                { inc = acc.inc; cur = sum })
+                { acc with cur = sum })
         { inc = 0; cur = System.Int32.MaxValue }
 
 printfn "%i" p2.inc
