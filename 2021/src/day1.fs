@@ -1,3 +1,5 @@
+module day1
+
 type foldState = { inc: int; cur: int }
 
 let input =
@@ -12,7 +14,7 @@ let p1 =
             if value > acc.cur then
                 { inc = acc.inc + 1; cur = value }
             else
-                { inc = acc.inc; cur = value })
+                { acc with cur = value })
         { inc = 0; cur = System.Int32.MaxValue }
 
 printfn "%i" p1.inc
