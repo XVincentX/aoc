@@ -3,8 +3,7 @@
 (def input (-> "./input/day1input.txt"
                clojure.core/slurp
                split-lines
-               (->> (map #(Integer/parseInt %))
-                    (into []))))
+               (->> (mapv #(Integer/parseInt %)))))
 
 (def part1
   (reduce
