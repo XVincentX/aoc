@@ -24,8 +24,11 @@ let p2 =
         (fun acc value ->
             let index = fst value
 
-            let filled = Array.append input [| 0; 0 |]
-            let sum = filled.[index..index + 2]|> Array.sum
+            let sum =
+                input
+                |> Array.append [| 0; 0 |]
+                |> Array.sub <|| (index, 3)
+                |> Array.sum
 
             if sum > acc.cur then
                 { inc = acc.inc + 1; cur = sum }
