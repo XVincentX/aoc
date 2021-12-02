@@ -1,12 +1,15 @@
 module day2
 
-type foldState = { horizontal: int; depth: int; aim: int }
+type foldState =
+    { horizontal: int
+      depth: int
+      aim: int }
 
 let input =
     "./input/day2input.txt"
     |> System.IO.File.ReadAllLines
     |> Array.map (fun x -> x.Split " ")
-    |> Array.map(fun x -> (x[0], System.Int32.Parse(x[1])))
+    |> Array.map (fun x -> (x[ 0 ], System.Int32.Parse(x[ 1 ])))
 
 let p1 =
     input

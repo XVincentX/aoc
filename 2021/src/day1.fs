@@ -27,9 +27,8 @@ let p2 =
             let index = fst value
 
             let sum =
-                input
-                |> Array.append [| 0; 0 |]
-                |> Array.sub <|| (index, 3)
+                input |> Array.append [| 0; 0 |] |> Array.sub
+                <|| (index, 3)
                 |> Array.sum
 
             if sum > acc.cur then
