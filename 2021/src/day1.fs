@@ -11,10 +11,12 @@ let p1 =
     input
     |> Array.fold
         (fun acc value ->
-            if value > acc.cur then
-                { inc = acc.inc + 1; cur = value }
-            else
-                { acc with cur = value })
+            let nextInc =
+                match value with
+                | x when x > acc.cur -> acc.inc + 1
+                | _ -> acc.cur
+
+            { inc = nextInc; cur = value })
         { inc = 0; cur = System.Int32.MaxValue }
 
 printfn "%i" p1.inc
@@ -31,10 +33,12 @@ let p2 =
                 <|| (index, 3)
                 |> Array.sum
 
-            if sum > acc.cur then
-                { inc = acc.inc + 1; cur = sum }
-            else
-                { acc with cur = sum })
+            let nextInc =
+                match sum with
+                | x when x > acc.cur -> acc.inc + 1
+                | _ -> acc.cur
+
+            { inc = nextInc; cur = sum })
         { inc = 0; cur = System.Int32.MaxValue }
 
 printfn "%i" p2.inc
