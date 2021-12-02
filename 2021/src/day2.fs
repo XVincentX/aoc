@@ -1,4 +1,5 @@
 module day2
+open FSharpx.Text
 
 type foldState =
     { horizontal: int
@@ -8,7 +9,7 @@ type foldState =
 let input =
     "./input/day2input.txt"
     |> System.IO.File.ReadAllLines
-    |> Array.map (fun x -> x.Split " ")
+    |> Array.map (Strings.split ' ')
     |> Array.map (fun x -> (x.[0], System.Int32.Parse(x.[1])))
 
 let p1 =
