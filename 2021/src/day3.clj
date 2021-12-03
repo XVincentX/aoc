@@ -21,15 +21,14 @@
    (fn [power-data frequencies]
      (let [freq-0 (get frequencies 0)
            freq-1 (get frequencies 1)
-           most-common (if (> freq-0 freq-1) 0 1)
-           less-common (if (zero? most-common) 1 0)]
+           most-common (if (> freq-0 freq-1) 0 1)]
        (-> power-data
            (update :gamma str most-common)
-           (update :epsilon str less-common))))
+           (update :epsilon str (bit-xor most-common 1)))))
    {:gamma "" :epsilon ""} input-freqs))
 
 
-(defn find-value [default type]
+(defn find-value [default]
   (loop [ox-data input
          idx 0
          frequencies input-freqs]
@@ -39,15 +38,13 @@
   (let [nf (nth frequencies idx)
         freq-0 (get nf 0 0)
         freq-1 (get nf 1 0)
-        common {:most (if (> freq-0 freq-1) 0 1) :less (if (> freq-0 freq-1) 1 0)}
-        eq-freq (= freq-1 freq-0)
-        next (if eq-freq (filter #(= default (nth % idx)) ox-data)
-                 (filter #(= (type common) (nth % idx)) ox-data))
-        next-freq (-> next transpose (->> (mapv clojure.core/frequencies)))]
+        eq-freq (= freq-0 freq-1)
+        most-common (if (> freq-0 freq-1) 0 1)
+        filter-val (if eq-freq default (if (zero? default) (bit-xor most-common 1) most-common))
+        next (filter #(= filter-val (nth % idx)) ox-data)]
+        
     (recur next
            (inc idx)
-           next-freq)))))
+           (-> next transpose (->> (mapv clojure.core/frequencies))))))))
 
-(def part2
-  (let [a (find-value 1 :most)
-        b (find-value 0 :less)] [a b]))
+(def part2 {:oxygen (find-value 1) :co2 (find-value 0)})
