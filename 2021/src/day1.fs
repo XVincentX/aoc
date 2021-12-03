@@ -29,8 +29,9 @@ let p2 =
             let index = fst value
 
             let sum =
-                input |> Array.append [| 0; 0 |] |> Array.sub
-                <|| (index, 3)
+                input
+                |> Array.append [| 0; 0 |]
+                |> fun x -> Array.sub x index 3
                 |> Array.sum
 
             let nextInc =
