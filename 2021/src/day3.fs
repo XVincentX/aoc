@@ -21,10 +21,9 @@ let p1 =
             let freq2 = value.[1]
 
             let most_common =
-                if snd freq1 > snd freq2 then
-                    fst freq1
-                else
-                    fst freq2
+                match snd freq1 > snd freq2 with
+                | true -> fst freq1
+                | false -> fst freq2
 
             let parsed =
                 System.Int32.Parse(most_common.ToString())
@@ -34,7 +33,7 @@ let p1 =
             { gamma = acc.gamma + parsed.ToString()
               epsilon = acc.epsilon + reversed.ToString() })
 
-        { gamma = "0"; epsilon = "0" }
+        { gamma = ""; epsilon = "" }
         input_freqs
 
 printfn "%A" p1
