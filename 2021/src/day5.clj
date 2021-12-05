@@ -13,7 +13,7 @@
                 (map (fn [[[x1 _] [x2 _]]] (max x1 x2)))
                 (apply max)
                 inc))
-                
+
 (def matrix (vec (repeat grid-size (vec (repeat grid-size 0)))))
 
 (defn compute-tuples [diagonal? [[x1 y1] [x2 y2]]]
@@ -34,26 +34,16 @@
       (if diagonal? (partition 2 (interleave (if gt_x x-range (reverse x-range))
                                (if gt_y y-range (reverse y-range)))) []))))
 
-(def part1
+(defn trav [tuples-fn input]
   (->> (reduce (fn [matrix [[x1 y1] [x2 y2]]]
                  (reduce (fn [matrix [x y]]
                            (-> matrix
                                (update y update x inc))) matrix
-                         (compute-tuples false [[x1 y1] [x2 y2]])))
+                         (tuples-fn [[x1 y1] [x2 y2]])))
                matrix input)
        (mapcat identity)
        (filter #(>= % 2))
        count))
 
-(def part2
-  (->> (reduce
-        (fn [matrix [[x1 y1] [x2 y2]]]
-          (reduce
-           (fn [matrix [x y]]
-             (-> matrix (update y update x inc)))
-           matrix
-           (compute-tuples true [[x1 y1] [x2 y2]])))
-        matrix input)
-       (mapcat identity)
-       (filter #(>= % 2))
-       count))       
+(def part1 (trav (partial compute-tuples false) input))
+(def part2 (trav (partial compute-tuples true) input))
