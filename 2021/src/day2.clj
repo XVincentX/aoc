@@ -4,7 +4,7 @@
                clojure.core/slurp
                split-lines
                (->> (map #(split % #" "))
-                    (mapv (fn [[x y]] [x (Integer/parseInt y)])))))
+                    (mapv (fn [[x y]] [x clojure.core/parse-long])))))
 
 (def part1
   (reduce

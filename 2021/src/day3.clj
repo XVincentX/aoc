@@ -12,7 +12,7 @@
                clojure.core/slurp
                split-lines
                (->> (mapv #(split % #"")))
-               (->> (mapv #(mapv (fn [x] (Integer/parseInt x)) %)))))
+               (->> (mapv #(mapv (fn [x] clojure.core/parse-long) %)))))
 
 (def input-freqs (-> input transpose (->> (mapv frequencies))))
 
