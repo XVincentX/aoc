@@ -9,17 +9,12 @@
                                           (split #" -> ")
                                           (->> (mapv #(mapv clojure.core/parse-long (split % #","))))))))))
 
-(def max-x (->> input
+(def grid-size (->> input
                 (map (fn [[[x1 _] [x2 _]]] (max x1 x2)))
                 (apply max)
                 inc))
-
-(def max-y (->> input
-                (map (fn [[[_ y1] [_ y2]]] (max y1 y2)))
-                (apply max)
-                inc))
-
-(def matrix (vec (repeat max-x (vec (repeat max-y 0)))))
+                
+(def matrix (vec (repeat grid-size (vec (repeat grid-size 0)))))
 
 (defn compute-tuples [diagonal? [[x1 y1] [x2 y2]]]
   (let [mmx (inc (max x1 x2))
@@ -51,12 +46,14 @@
        count))
 
 (def part2
-  (->> (reduce (fn [matrix [[x1 y1] [x2 y2]]]
-                 (reduce (fn [matrix [x y]]
-                           (-> matrix
-                               (update y update x inc))) matrix
-                         (compute-tuples true [[x1 y1] [x2 y2]])))
-               matrix input)
+  (->> (reduce
+        (fn [matrix [[x1 y1] [x2 y2]]]
+          (reduce
+           (fn [matrix [x y]]
+             (-> matrix (update y update x inc)))
+           matrix
+           (compute-tuples true [[x1 y1] [x2 y2]])))
+        matrix input)
        (mapcat identity)
        (filter #(>= % 2))
        count))       
