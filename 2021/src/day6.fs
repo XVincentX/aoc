@@ -7,17 +7,17 @@ open FSharpx.Text
 type foldState = { gamma: string; epsilon: string }
 
 
-let getCountAt (n: int) (a: (int * int64) array) =
-    match Array.tryFind (fun (num, _) -> num = n) a with
+let getCountAt (n: int) (coll: (int * int64) array) =
+    match Array.tryFind (fun (num, _) -> num = n) coll with
     | Some (_, c) -> c
     | None -> 0
 
-let setCountAt (n: int) (value: int64) a =
-    match Array.tryFindIndex (fun (num, _) -> num = n) a with
+let setCountAt (n: int) (value: int64) coll =
+    match Array.tryFindIndex (fun (num, _) -> num = n) coll with
     | Some x ->
-        a.[x] <- (n, value)
-        a
-    | None -> Array.append a [| (n, value) |]
+        coll.[x] <- (n, value)
+        coll
+    | None -> Array.append coll [| (n, value) |]
 
 let updateAt (n: int) (fn: int64 -> int64) a =
     let oldV = getCountAt n a
