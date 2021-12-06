@@ -12,13 +12,13 @@ let getValueAt (n: int) (coll: (int * int64) array) =
     | Some (_, c) -> c
     | None -> 0
 
-let setValueAt (n: int) (value: int64) coll =
+let setValueAt (n: int) coll (value: int64) =
     match Array.tryFindIndex (fun (num, _) -> num = n) coll with
     | Some x -> Array.updateAt x (n, value) coll
     | None -> Array.append coll [| (n, value) |]
 
 let updateAt (n: int) (fn: int64 -> int64) coll =
-    coll |> getValueAt n |> fn |> setValueAt n <| coll
+    coll |> getValueAt n |> fn |> setValueAt n coll
 
 let input =
     "./input/day6input.txt"
