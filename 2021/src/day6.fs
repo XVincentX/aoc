@@ -17,11 +17,8 @@ let setCountAt (n: int) (value: int64) coll =
     | Some x -> Array.updateAt x (n, value) coll
     | None -> Array.append coll [| (n, value) |]
 
-let updateAt (n: int) (fn: int64 -> int64) a =
-    let oldV = getCountAt n a
-    let newV = fn oldV
-
-    setCountAt n newV a
+let updateAt (n: int) (fn: int64 -> int64) coll =
+    coll |> getCountAt n |> fn |> setCountAt n <| coll
 
 let input =
     "./input/day6input.txt"
