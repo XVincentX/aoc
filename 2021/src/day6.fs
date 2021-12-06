@@ -14,9 +14,7 @@ let getCountAt (n: int) (coll: (int * int64) array) =
 
 let setCountAt (n: int) (value: int64) coll =
     match Array.tryFindIndex (fun (num, _) -> num = n) coll with
-    | Some x ->
-        coll.[x] <- (n, value)
-        coll
+    | Some x -> Array.updateAt x (n, value) coll
     | None -> Array.append coll [| (n, value) |]
 
 let updateAt (n: int) (fn: int64 -> int64) a =
@@ -26,7 +24,7 @@ let updateAt (n: int) (fn: int64 -> int64) a =
     setCountAt n newV a
 
 let input =
-    "./input/day3input.txt"
+    "./input/day6input.txt"
     |> File.ReadAllText
     |> Strings.split ','
     |> Array.countBy id
