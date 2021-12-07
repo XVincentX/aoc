@@ -4,9 +4,6 @@ open System
 open System.IO
 open FSharpx.Text
 
-type foldState = { gamma: string; epsilon: string }
-
-
 let getValueAt (n: int) (coll: (int * int64) array) =
     match Array.tryFind (fun (num, _) -> num = n) coll with
     | Some (_, c) -> c
