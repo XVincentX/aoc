@@ -9,10 +9,7 @@ let input =
     |> Strings.split ','
     |> Array.map System.Int32.Parse
 
-let distance: int -> int = id
-
-let distance2: int -> int =
-    (fun x -> [| for i in 0 .. x -> i |] |> Array.sum)
+let distance x = [| for i in 0 .. x -> i |] |> Array.sum
 
 let solution (fn: int -> int) =
     Array.fold
@@ -37,5 +34,5 @@ let solution (fn: int -> int) =
     |> Array.min
 
 
+printfn "%i" (solution id)
 printfn "%i" (solution distance)
-printfn "%i" (solution distance2)
