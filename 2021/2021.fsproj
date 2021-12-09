@@ -10,6 +10,7 @@
     <Compile Include="src/day3.fs" />
     <Compile Include="src/day6.fs" />
     <Compile Include="src/day7.fs" />
+    <Compile Include="src/day9.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="fsharpx.extras" Version="3.0.0" />
