@@ -12,7 +12,7 @@ let foldi (folder: int -> int -> 'S -> 'T -> 'S) (state: 'S) (array: 'T [,]) =
     |> Seq.fold (fun acc (x, y, e) -> folder x y acc e) state
 
 let input =
-    "/Users/vincenzoc/dev/aoc/2021/input/day9input.txt"
+    "./input/day9input.txt"
     |> File.ReadAllLines
     |> Array.map Strings.toCharArray
     |> array2D
@@ -107,6 +107,7 @@ let part2 =
     basins
     |> Array.map Set.count
     |> Array.sort
+    |> Array.rev
     |> Array.take 3
     |> Array.reduce (fun x y -> x * y)
 
