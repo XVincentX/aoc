@@ -50,7 +50,9 @@ let part1 =
 printfn "%i" part1
 
 let rec basinLen x y curValue visited =
-    if Set.contains (x, y) visited || curValue = 9 || curValue = System.Int32.MaxValue then
+    if Set.contains (x, y) visited
+       || curValue = 9
+       || curValue = System.Int32.MaxValue then
         visited
     else
 
@@ -69,7 +71,7 @@ let rec basinLen x y curValue visited =
 
 and navigate curValue nextValue x y set =
     match System.Math.Abs(curValue - nextValue) with
-    | 1 -> basinLen x y nextValue set
+    | t when t >= 1 -> basinLen x y nextValue set
     | _ -> set
 
 let basins =
