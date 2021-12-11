@@ -50,7 +50,7 @@ let part1 =
 printfn "%i" part1
 
 let rec basinLen x y curValue visited =
-    if Set.contains (x, y) visited then
+    if Set.contains (x, y) visited || curValue = 9 then
         visited
     else
         let mutable nextSet = (Set.add (x, y) visited)
@@ -61,16 +61,16 @@ let rec basinLen x y curValue visited =
         let c = getOrMax input (x + 1) y
         let d = getOrMax input (x - 1) y
 
-        if c <> 9 && System.Math.Abs(curValue - c) = 1 then
+        if System.Math.Abs(curValue - c) = 1 then
             nextSet <- basinLen (x + 1) y c nextSet
 
-        if d <> 9 && System.Math.Abs(curValue - d) = 1 then
+        if System.Math.Abs(curValue - d) = 1 then
             nextSet <- basinLen (x - 1) y d nextSet
 
-        if a <> 9 && System.Math.Abs(curValue - a) = 1 then
+        if System.Math.Abs(curValue - a) = 1 then
             nextSet <- basinLen x (y + 1) a nextSet
 
-        if b <> 9 && System.Math.Abs(curValue - b) = 1 then
+        if System.Math.Abs(curValue - b) = 1 then
             nextSet <- basinLen x (y - 1) b nextSet
 
         nextSet
