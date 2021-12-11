@@ -67,7 +67,7 @@ let rec basinLen x y curValue visited =
         |> navigate curValue a x (y + 1)
         |> navigate curValue b x (y - 1)
 
-and navigate (curValue: int) (nextValue: int) x y set =
+and navigate curValue nextValue x y set =
     match System.Math.Abs(curValue - nextValue) with
     | 1 -> basinLen x y nextValue set
     | _ -> set
