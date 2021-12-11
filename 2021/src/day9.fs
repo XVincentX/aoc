@@ -50,40 +50,30 @@ let part1 =
 printfn "%i" part1
 
 let rec basinLen x y curValue visited =
+    if Set.contains (x, y) visited then
+        visited
+    else
+        let mutable nextSet = (Set.add (x, y) visited)
 
-    let mutable nextSet = (Set.add (x, y) visited)
+        let a = getOrMax input x (y + 1)
+        let b = getOrMax input x (y - 1)
 
-    let a = getOrMax input x (y + 1)
-    let b = getOrMax input x (y - 1)
+        let c = getOrMax input (x + 1) y
+        let d = getOrMax input (x - 1) y
 
-    let c = getOrMax input (x + 1) y
-    let d = getOrMax input (x - 1) y
+        if c <> 9 && System.Math.Abs(curValue - c) = 1 then
+            nextSet <- basinLen (x + 1) y c nextSet
 
-    if c <> 9
-       && (not (Set.contains (x + 1, y) visited))
-       && System.Math.Abs(curValue - c) = 1 then
-        let res = basinLen (x + 1) y c nextSet
-        nextSet <- res
+        if d <> 9 && System.Math.Abs(curValue - d) = 1 then
+            nextSet <- basinLen (x - 1) y d nextSet
 
-    if d <> 9
-       && (not (Set.contains (x - 1, y) visited))
-       && System.Math.Abs(curValue - d) = 1 then
-        let res = basinLen (x - 1) y d nextSet
-        nextSet <- res
+        if a <> 9 && System.Math.Abs(curValue - a) = 1 then
+            nextSet <- basinLen x (y + 1) a nextSet
 
-    if a <> 9
-       && (not (Set.contains (x, y + 1) visited))
-       && System.Math.Abs(curValue - a) = 1 then
-        let res = basinLen x (y + 1) a nextSet
-        nextSet <- res
+        if b <> 9 && System.Math.Abs(curValue - b) = 1 then
+            nextSet <- basinLen x (y - 1) b nextSet
 
-    if b <> 9
-       && (not (Set.contains (x, y - 1) visited))
-       && System.Math.Abs(curValue - b) = 1 then
-        let res = basinLen x (y - 1) b nextSet
-        nextSet <- res
-
-    nextSet
+        nextSet
 
 let basins =
     foldi
