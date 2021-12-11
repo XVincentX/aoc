@@ -61,19 +61,27 @@ let rec basinLen x y curValue visited =
         let c = getOrMax input (x + 1) y
         let d = getOrMax input (x - 1) y
 
-        if System.Math.Abs(curValue - c) = 1 then
-            nextSet <- basinLen (x + 1) y c nextSet
-
-        if System.Math.Abs(curValue - d) = 1 then
-            nextSet <- basinLen (x - 1) y d nextSet
-
-        if System.Math.Abs(curValue - a) = 1 then
-            nextSet <- basinLen x (y + 1) a nextSet
-
-        if System.Math.Abs(curValue - b) = 1 then
-            nextSet <- basinLen x (y - 1) b nextSet
-
         nextSet
+        |> (fun xx ->
+            if System.Math.Abs(curValue - c) = 1 then
+                basinLen (x + 1) y c xx
+            else
+                xx)
+        |> (fun xx ->
+            if System.Math.Abs(curValue - d) = 1 then
+                basinLen (x - 1) y d xx
+            else
+                xx)
+        |> (fun xx ->
+            if System.Math.Abs(curValue - a) = 1 then
+                basinLen x (y + 1) a xx
+            else
+                xx)
+        |> (fun xx ->
+            if System.Math.Abs(curValue - b) = 1 then
+                basinLen x (y - 1) b xx
+            else
+                xx)
 
 let basins =
     foldi
