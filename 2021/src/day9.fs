@@ -50,10 +50,9 @@ let part1 =
 printfn "%i" part1
 
 let rec basinLen x y curValue visited =
-    if Set.contains (x, y) visited || curValue = 9 then
+    if Set.contains (x, y) visited || curValue = 9 || curValue = System.Int32.MaxValue then
         visited
     else
-        let nextSet = (Set.add (x, y) visited)
 
         let a = getOrMax input x (y + 1)
         let b = getOrMax input x (y - 1)
@@ -61,17 +60,17 @@ let rec basinLen x y curValue visited =
         let c = getOrMax input (x + 1) y
         let d = getOrMax input (x - 1) y
 
-        nextSet
+        visited
+        |> Set.add (x, y)
         |> navigate curValue c (x + 1) y
         |> navigate curValue d (x - 1) y
         |> navigate curValue a x (y + 1)
         |> navigate curValue b x (y - 1)
 
 and navigate (curValue: int) (nextValue: int) x y set =
-    if System.Math.Abs(curValue - nextValue) = 1 then
-        basinLen x y nextValue set
-    else
-        set
+    match System.Math.Abs(curValue - nextValue) with
+    | 1 -> basinLen x y nextValue set
+    | _ -> set
 
 let basins =
     foldi
@@ -84,10 +83,10 @@ let basins =
             let take =
                 value < a && value < b && value < c && value < d
 
-            if take then
-                Array.append state [| basinLen x y value Set.empty |]
-            else
-                state)
+
+            match take with
+            | true -> Array.append state [| basinLen x y value Set.empty |]
+            | false -> state)
         Array.empty
         input
 
