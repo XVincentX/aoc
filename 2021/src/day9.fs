@@ -53,7 +53,7 @@ let rec basinLen x y curValue visited =
     if Set.contains (x, y) visited || curValue = 9 then
         visited
     else
-        let mutable nextSet = (Set.add (x, y) visited)
+        let nextSet = (Set.add (x, y) visited)
 
         let a = getOrMax input x (y + 1)
         let b = getOrMax input x (y - 1)
